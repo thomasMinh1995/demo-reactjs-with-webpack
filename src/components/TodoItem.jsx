@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TodoItem({ todo, handleChangeCheckbox }) {
+export default function TodoItem({ todo, handleChangeCheckbox, handleRemove }) {
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-300">
       <div className="flex items-center">
@@ -21,7 +21,7 @@ export default function TodoItem({ todo, handleChangeCheckbox }) {
         ) : (
           <></>
         )}
-        <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+        <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" onClick={(event) => handleRemove(event, todo.id)}>
           Remove
         </button>
       </div>

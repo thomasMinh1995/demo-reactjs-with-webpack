@@ -34,11 +34,17 @@ export default function TodoApp() {
 
   const handleChangeCheckbox = (event, id) => {
     const isCompleted = event.target.checked;
-    const updatedTodoList = todoList.map(item =>
+    const updatedTodoList = todoList.map((item) =>
       item.id === id ? { ...item, status: isCompleted } : item
     );
 
     setTodoList(updatedTodoList);
+  };
+
+  const handleRemove = (event, id) => {
+    event.preventDefault();
+    const removeTodoItem = todoList.filter(item => item.id !== id);
+    setTodoList(removeTodoItem)
   }
 
   return (
@@ -46,7 +52,12 @@ export default function TodoApp() {
       <h1 className="text-2xl font-bold mb-4 text-center">Todo App</h1>
       <div className="space-y-2">
         {todoList.map((item) => (
-          <TodoItem key={item.id} todo={item} handleChangeCheckbox={handleChangeCheckbox}/>
+          <TodoItem
+            key={item.id}
+            todo={item}
+            handleChangeCheckbox={handleChangeCheckbox}
+            handleRemove={handleRemove}
+          />
         ))}
       </div>
     </div>
