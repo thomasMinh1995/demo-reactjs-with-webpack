@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function TodoItem({ todo }) {
+export default function TodoItem({ todo, handleChangeCheckbox }) {
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-300">
       <div className="flex items-center">
-        <input type="checkbox" className="mr-2" />
-        <p className="text-gray-800">{todo.task}</p>
+        <input type="checkbox" className="mr-2" onChange={(event) => handleChangeCheckbox(event, todo.id)}/>
+        <p className={`text-gray-800 ${todo.status ? 'line-through' : ''}`}>{todo.task}</p>
       </div>
       <div className="space-x-2">
         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
