@@ -3,31 +3,11 @@ import TodoItem from "./components/TodoItem";
 
 export default function TodoApp() {
   const todoListData = [
-    {
-      id: 1,
-      task: "Buy groceries",
-      status: true,
-    },
-    {
-      id: 2,
-      task: "Walk the dog",
-      status: false,
-    },
-    {
-      id: 3,
-      task: "Finish project report",
-      status: true,
-    },
-    {
-      id: 4,
-      task: "Read a book",
-      status: true,
-    },
-    {
-      id: 5,
-      task: "Exercise",
-      status: false,
-    },
+    { id: 1, task: "Buy groceries", status: true },
+    { id: 2, task: "Walk the dog", status: false },
+    { id: 3, task: "Finish project report", status: true },
+    { id: 4, task: "Read a book", status: true },
+    { id: 5, task: "Exercise", status: false },
   ];
 
   const [todoList, setTodoList] = useState(todoListData);
@@ -55,22 +35,26 @@ export default function TodoApp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    debugger;
     const todoObj = {
       id: todoList.length + 1,
       task: todoItem,
-      status: true,
+      status: false, // New tasks should be incomplete
     };
 
     setTodoList(todoList.concat(todoObj));
     setTodoItem("");
   };
 
+  const handleEdit = (id, newTask) => {
+    const updatedTodoList = todoList.map((item) =>
+      item.id === id ? { ...item, task: newTask } : item
+    );
+    setTodoList(updatedTodoList);
+  };
+
   return (
     <div className="p-4 max-w-xl mx-auto bg-gray-50 rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Todo App
-      </h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Todo App</h1>
 
       <div className="flex justify-center mb-4">
         <form onSubmit={handleSubmit} className="w-full flex items-center">
@@ -96,6 +80,7 @@ export default function TodoApp() {
             todo={item}
             handleChangeCheckbox={handleChangeCheckbox}
             handleRemove={handleRemove}
+            handleEdit={handleEdit}
           />
         ))}
       </div>
