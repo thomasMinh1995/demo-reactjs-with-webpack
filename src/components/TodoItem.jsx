@@ -8,6 +8,7 @@ export default function TodoItem({ todo, handleChangeCheckbox, handleRemove }) {
           type="checkbox"
           className="mr-2"
           onChange={(event) => handleChangeCheckbox(event, todo.id)}
+          checked={todo.status}
         />
         <p className={`text-gray-800 ${todo.status ? "line-through" : ""}`}>
           {todo.task}
